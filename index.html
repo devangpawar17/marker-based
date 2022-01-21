@@ -9,7 +9,7 @@
             AFRAME.registerComponent('videohandler', {
                 init: function () {
                     var marker = this.el;
-                    this.vid = document.querySelector("#king");
+                    this.vid = document.querySelectorAll("video");
 
                     marker.addEventListener('markerFound', function () {
                         this.toggle = true;
@@ -22,22 +22,7 @@
                     }.bind(this));
                 },
             });
-            AFRAME.registerComponent('videohandler1', {
-                init: function () {
-                    var marker = this.el;
-                    this.vid = document.querySelector("#earth");
-
-                    marker.addEventListener('markerFound', function () {
-                        this.toggle = true;
-                        this.vid.play();
-                    }.bind(this));
-
-                    marker.addEventListener('markerLost', function () {
-                        this.toggle = false;
-                        this.vid.pause();
-                    }.bind(this));
-                },
-            });
+           
         </script>
     </head>
 
