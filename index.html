@@ -9,7 +9,7 @@
             AFRAME.registerComponent('videohandler', {
                 init: function () {
                     var marker = this.el;
-                    this.vid = document.querySelectorAll("video");
+                    this.vid = document.querySelector(".king");
 
                     marker.addEventListener('markerFound', function () {
                         this.toggle = true;
@@ -38,6 +38,7 @@
             <a-assets>
                 <video
                     id="king"
+                    class="king"
                     src="assets/king.mp4"
                     preload="auto"
                     response-type="arraybuffer"
@@ -50,6 +51,7 @@
                 ></video>
                 <video
                     id="earth"
+                    class="king"
                     src="assets/video.mp4"
                     preload="auto"
                     response-type="arraybuffer"
