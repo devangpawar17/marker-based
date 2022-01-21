@@ -35,6 +35,26 @@
                 ></a-video>
             </a-marker>
 
+
+            <a-marker
+            id="animated-marker"
+            type="pattern"
+            preset="custom"
+            url="assets/pattern-dhoni.patt"
+            raycaster="objects: .clickable"
+            emitevents="true"
+            cursor="fuse: false; rayOrigin: mouse;"
+            id="markerA"
+        >
+            <a-video
+                src="assets/video.mp4"
+                scale="1 1 1"
+                class="clickable"
+                rotation="-90 0 0"
+                gesture-handler
+            ></a-video>
+        </a-marker>
+
             <a-entity camera></a-entity>
         </a-scene>
     </body>
