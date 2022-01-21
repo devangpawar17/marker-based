@@ -5,55 +5,109 @@
         <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
         <script src="https://raw.githack.com/AR-js-org/studio-backend/master/src/modules/marker/tools/gesture-detector.js"></script>
         <script src="https://raw.githack.com/AR-js-org/studio-backend/master/src/modules/marker/tools/gesture-handler.js"></script>
+        <script>
+            AFRAME.registerComponent('videohandler', {
+                init: function () {
+                    var marker = this.el;
+                    this.vid = document.querySelector("#vid");
+
+                    marker.addEventListener('markerFound', function () {
+                        this.toggle = true;
+                        this.vid.play();
+                    }.bind(this));
+
+                    marker.addEventListener('markerLost', function () {
+                        this.toggle = false;
+                        this.vid.pause();
+                    }.bind(this));
+                },
+            });
+        </script>
     </head>
 
     <body style="margin: 0; overflow: hidden;">
         <a-scene
-            vr-mode-ui="enabled: false;"
+            vr-mode-ui="enabled: false"
             loading-screen="enabled: false;"
-            arjs="trackingMethod: best; sourceType: webcam; debugUIEnabled: false;"
+            arjs='sourceType: webcam; debugUIEnabled: false;'
             id="scene"
             embedded
             gesture-detector
         >
+            <a-assets>
+                <video
+                    id="king"
+                    src="assets/king.mp4"
+                    preload="auto"
+                    response-type="arraybuffer"
+                    loop
+                    crossorigin
+                    webkit-playsinline
+                    autoplay
+                    muted
+                    playsinline
+                ></video>
+                <video
+                    id="earth"
+                    src="assets/video.mp4"
+                    preload="auto"
+                    response-type="arraybuffer"
+                    loop
+                    crossorigin
+                    webkit-playsinline
+                    autoplay
+                    muted
+                    playsinline
+                ></video>
+            </a-assets>
+
             <a-marker
-                id="animated-marker"
                 type="pattern"
                 preset="custom"
                 url="assets/pattern-img.patt"
+                videohandler
+                smooth="true"
+                smoothCount="10"
+                smoothTolerance="0.01"
+                smoothThreshold="5"
                 raycaster="objects: .clickable"
                 emitevents="true"
                 cursor="fuse: false; rayOrigin: mouse;"
                 id="markerA"
             >
                 <a-video
-                    src="assets/king.mp4"
+                    src="#king"
                     scale="1 1 1"
-                    class="clickable"
+                    position="0 0.1 0"
                     rotation="-90 0 0"
+                    class="clickable"
                     gesture-handler
                 ></a-video>
             </a-marker>
 
-
             <a-marker
-            id="animated-marker"
-            type="pattern"
-            preset="custom"
-            url="assets/pattern-dhoni.patt"
-            raycaster="objects: .clickable"
-            emitevents="true"
-            cursor="fuse: false; rayOrigin: mouse;"
-            id="markerA"
-        >
-            <a-video
-                src="assets/video.mp4"
-                scale="1 1 1"
-                class="clickable"
-                rotation="-90 0 0"
-                gesture-handler
-            ></a-video>
-        </a-marker>
+                type="pattern"
+                preset="custom"
+                url="assets/pattern-dhoni.patt"
+                videohandler
+                smooth="true"
+                smoothCount="10"
+                smoothTolerance="0.01"
+                smoothThreshold="5"
+                raycaster="objects: .clickable"
+                emitevents="true"
+                cursor="fuse: false; rayOrigin: mouse;"
+                id="markerA"
+            >
+                <a-video
+                    src="#earth"
+                    scale="1 1 1"
+                    position="0 0.1 0"
+                    rotation="-90 0 0"
+                    class="clickable"
+                    gesture-handler
+                ></a-video>
+            </a-marker>
 
             <a-entity camera></a-entity>
         </a-scene>
