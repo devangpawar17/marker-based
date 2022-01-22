@@ -8,8 +8,8 @@
         <script>
             AFRAME.registerComponent('videohandler', {
                 init: function () {
-                    var marker = this.el;
-                    this.vid = document.querySelector("video");
+                    var marker = document.getElementById('markerA');
+                    this.vid = document.querySelector("#king");
 
                     marker.addEventListener('markerFound', function () {
                         this.toggle = true;
@@ -22,6 +22,24 @@
                     }.bind(this));
                 },
             });
+
+            AFRAME.registerComponent('videohandler', {
+                init: function () {
+                    var marker = document.getElementById('markerB');
+                    this.vid = document.querySelector("#earth");
+
+                    marker.addEventListener('markerFound', function () {
+                        this.toggle = true;
+                        this.vid.play();
+                    }.bind(this));
+
+                    marker.addEventListener('markerLost', function () {
+                        this.toggle = false;
+                        this.vid.pause();
+                    }.bind(this));
+                },
+            });
+           
            
         </script>
     </head>
@@ -100,7 +118,7 @@
                 raycaster="objects: .clickable"
                 emitevents="true"
                 cursor="fuse: false; rayOrigin: mouse;"
-                id="markerA"
+                id="markerB"
             >
                 <a-video
                     src="#earth"
